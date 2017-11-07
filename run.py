@@ -8,7 +8,6 @@ import random
 import json
 import time
 from random import randint
-import hashlib
 
 # Import our configuration
 from conf import config
