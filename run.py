@@ -8,6 +8,7 @@ import random
 import json
 import time
 from random import randint
+import hashlib
 
 # Import our configuration
 from conf import config
@@ -80,8 +81,15 @@ def upload_file():
     # Only continue if a file that's allowed gets submitted.
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
+      ext = filename.rsplit('.', 1)[1]
+      filename = os.urandom(5).hex() + '.' +  ext
       while os.path.exists(os.path.join(config["UPLOAD_FOLDER"], filename)):
         filename = str(randint(1000,8999)) + '-' + secure_filename(filename)
+
+
+    # New *hashed* file naming
+        ext = filename.rsplit('.', 1)[1]
+        filename = os.urandom(5).hex() + '.' +  ext
 
       thread1 = Thread(target = db.add_file, args = (filename,))
       thread1.start()
@@ -90,7 +98,7 @@ def upload_file():
       thread1.join()
 
       data["file"] = filename
-      data["url"] = config["DOMAIN"] + "/" + filename
+      data["url"] = config["DOMAIN"] + filename
       print_log('Main', 'New file processed "' + filename + '"')
 
       try:
