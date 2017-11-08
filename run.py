@@ -7,6 +7,7 @@ import os
 import random
 import json
 import time
+import mimetypes
 from random import randint
 
 # Import our configuration
@@ -63,10 +64,9 @@ def allowed_file(filename):
     return True
   else:
     if config["BLACKLIST"]:
-      return '.' in filename and filename.rsplit('.', 1)[1] not in config["BANNED_EXTENSIONS"]      
+      return mimetypes.guess_type(filename)[0] in config["BANNED_MIMETYPES"]
     else:
-      return '.' in filename and filename.rsplit('.', 1)[1] in config["ALLOWED_EXTENSIONS"]
-
+      return mimetypes.guess_type(filename)[0] in config["ALLOWED_MIMETYPES"]
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
