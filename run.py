@@ -7,7 +7,7 @@ import os
 import random
 import json
 import time
-import mimetypes
+import magic
 from random import randint
 
 # Import our configuration
@@ -59,14 +59,20 @@ def error_page(error, code):
   return render_template('error.html', page=config["SITE_DATA"], error=error, code=code)
 
 
-def allowed_file(filename):
+def allowed_file(file):
   if config["ALLOW_ALL_FILES"]:
     return True
   else:
     if config["BLACKLIST"]:
-      return mimetypes.guess_type(filename)[0] in config["BANNED_MIMETYPES"]
+      print("blacklist ON")
+      print(magic.from_buffer(file.read(1024), mime=True))
+      print(magic.from_buffer(file.read(1024), mime=False) not in config["BANNED_MIMETYPES"])
+      return magic.from_buffer(file.read(1024), mime=True) not in config["BANNED_MIMETYPES"]
     else:
-      return mimetypes.guess_type(filename)[0] in config["ALLOWED_MIMETYPES"]
+      print("blacklist OFF")
+      print(magic.from_buffer(file.read(1024), mime=True))
+      print(magic.from_buffer(file.read(1024), mime=True) in config["ALLOWED_MIMETYPES"])
+      return magic.from_buffer(file.read(1024), mime=True) in config["ALLOWED_MIMETYPES"]
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -78,15 +84,12 @@ def upload_file():
     file = request.files['file']
 
     # Only continue if a file that's allowed gets submitted.
-    if file and allowed_file(file.filename):
+    if file and allowed_file(file):
       filename = secure_filename(file.filename)
       ext = filename.rsplit('.', 1)[1]
       filename = os.urandom(5).hex() + '.' +  ext
+      # Rename file again if file exists
       while os.path.exists(os.path.join(config["UPLOAD_FOLDER"], filename)):
-        filename = str(randint(1000,8999)) + '-' + secure_filename(filename)
-
-
-    # New *hashed* file naming
         ext = filename.rsplit('.', 1)[1]
         filename = os.urandom(5).hex() + '.' +  ext
 
