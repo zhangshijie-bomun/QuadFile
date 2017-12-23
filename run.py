@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from flask import Flask, request, redirect, url_for, send_from_directory, abort, render_template
 from werkzeug import secure_filename
+from werkzeug.datastructures import FileStorage
 from threading import Thread, Timer
 import logging
 import os
@@ -64,12 +65,12 @@ def allowed_file(file):
     return True
   else:
     if config["BLACKLIST"]:
-      if magic.from_buffer(file.read(1024), mime=True) not in config["BANNED_MIMETYPES"]:
+      if magic.from_buffer(file.read(file.content_length), mime=True) not in config["BANNED_MIMETYPES"]:
         return True
       else:
         return False
     else:
-      return magic.from_buffer(file.read(1024), mime=True) in config["ALLOWED_MIMETYPES"]
+      return magic.from_buffer(file.read(file.content_length), mime=True) in config["ALLOWED_MIMETYPES"]
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
