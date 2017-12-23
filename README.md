@@ -20,6 +20,7 @@ Needed:
 * Python 3 (Python 2 might work, dunno, i don't test that, don't care either)
 * sqlite3 package for your OS (To create the database)
 * Install flask, currently that should be the only requirement and hopefully forever (``pip install -r requirements.txt``)
+* python-magic - For the mimetype filtering
 
 Recommended:
 
