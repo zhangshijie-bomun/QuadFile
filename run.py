@@ -90,12 +90,11 @@ def upload_file():
     # Only continue if a file that's allowed gets submitted.
     if file and allowed_file(file):
       filename = secure_filename(file.filename)
-      ext = filename.rsplit('.', 1)[1]
-      filename = os.urandom(5).hex() + '.' +  ext
-      # Rename file again if file exists
-      while os.path.exists(os.path.join(config["UPLOAD_FOLDER"], filename)):
+      if filename.find(".")!=-1: #check if filename has a .(to check if it should split ext)
         ext = filename.rsplit('.', 1)[1]
         filename = os.urandom(5).hex() + '.' +  ext
+      else:
+        filename = os.urandom(5).hex()
 
       thread1 = Thread(target = db.add_file, args = (filename,))
       thread1.start()
