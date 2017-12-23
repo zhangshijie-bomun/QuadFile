@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from flask import Flask, request, redirect, url_for, send_from_directory, abort, render_template
 from werkzeug import secure_filename
-from werkzeug.datastructures import FileStorage
 from threading import Thread, Timer
 import logging
 import os
@@ -66,17 +65,18 @@ def allowed_file(file):
   else:
     if config["BLACKLIST"]:
       if magic.from_buffer(file.read(1024), mime=True) not in config["BANNED_MIMETYPES"]:
-        print(magic.from_buffer(file.read(1024), mime=True))
+        file.seek(0) # seek back to start so a valid file could be read
+        return True
+      else:
+        file.seek(0)
+        return False
+    else:
+      if magic.from_buffer(file.read(1024), mime=True) in config["ALLOWED_MIMETYPES"]:
         file.seek(0)
         return True
       else:
-        return False
-        print("blocked")
-        print(magic.from_buffer(file.read(1024), mime=True))
         file.seek(0)
-    else:
-      return magic.from_buffer(file.read(1024), mime=True) in config["ALLOWED_MIMETYPES"]
-    file.seek(0)
+        return False
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -155,7 +155,7 @@ def page_not_found(e):
     return error_page(error="We couldn't find that. Are you sure you know what you're looking for?", code=404), 404
 @app.errorhandler(500)
 def internal_error(e):
-    return error_page(error="Oops, this is an unknown error, not good.", code=500), 500
+    return error_page(error="Unknown error, try your upload again, or contact the admin.", code=500), 500
 @app.errorhandler(403)
 def no_permission(e):
     return error_page(error="Check your privilege yo", code=403), 403
@@ -175,7 +175,7 @@ def get_file(filename):
 @app.route('/error/<int:error>')
 def nginx_error(error):
   if error == 413:
-    return error_page(error="O-o-onii-chan, noo it's too big ~~", code=413), 413
+    return error_page(error="The file you uploaded was too large for the server to handle.", code=413), 413
   elif error == 403: # Block IPs with your web server and return /error/403 for this page
     return error_page(error="Sorry, the IP you're using has been blocked due to excessive abuse", code=403), 403
   else:
