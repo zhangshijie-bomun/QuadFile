@@ -65,12 +65,18 @@ def allowed_file(file):
     return True
   else:
     if config["BLACKLIST"]:
-      if magic.from_buffer(file.read(file.content_length), mime=True) not in config["BANNED_MIMETYPES"]:
+      if magic.from_buffer(file.read(1024), mime=True) not in config["BANNED_MIMETYPES"]:
+        print(magic.from_buffer(file.read(1024), mime=True))
+        file.seek(0)
         return True
       else:
         return False
+        print("blocked")
+        print(magic.from_buffer(file.read(1024), mime=True))
+        file.seek(0)
     else:
-      return magic.from_buffer(file.read(file.content_length), mime=True) in config["ALLOWED_MIMETYPES"]
+      return magic.from_buffer(file.read(1024), mime=True) in config["ALLOWED_MIMETYPES"]
+    file.seek(0)
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
