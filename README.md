@@ -2,10 +2,10 @@
 
 A temporary (or permanent, depending on configuration) file sharing service written in Flask.
 
-# Features
+## Features
 
 * Automatically remove files that aren't accessed often enough
-* Supports all filetypes
+* Supports all filetypes, with options to filter by mimetypes
 * Prevents duplicate filenames
 * Works on all platforms (as long as they can use basic JavaScript)
 * Both easy to set up and use
@@ -13,9 +13,9 @@ A temporary (or permanent, depending on configuration) file sharing service writ
 * Color-coded and real-time console log
 * Easy to use with most applications, such as ShareX
 
-# Requirements
+## Requirements
 
-Needed: 
+Needed:
 
 * Python 3 (Python 2 might work, dunno, i don't test that, don't care either)
 * sqlite3 package for your OS (To create the database)
@@ -26,7 +26,7 @@ Recommended:
 * nginx, great for proxy_pass
 * gunicorn, allows you to use QuadFile with multiple workers
 
-# Using the thing
+## Using the thing
 
 * Clone the repo somewhere
 * Do ``cp conf.py.sample conf.py``
