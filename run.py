@@ -64,14 +64,11 @@ def allowed_file(file):
     return True
   else:
     if config["BLACKLIST"]:
-      print("blacklist ON")
-      print(magic.from_buffer(file.read(1024), mime=True))
-      print(magic.from_buffer(file.read(1024), mime=False) not in config["BANNED_MIMETYPES"])
-      return magic.from_buffer(file.read(1024), mime=True) not in config["BANNED_MIMETYPES"]
+      if magic.from_buffer(file.read(1024), mime=True) not in config["BANNED_MIMETYPES"]:
+        return True
+      else:
+        return False
     else:
-      print("blacklist OFF")
-      print(magic.from_buffer(file.read(1024), mime=True))
-      print(magic.from_buffer(file.read(1024), mime=True) in config["ALLOWED_MIMETYPES"])
       return magic.from_buffer(file.read(1024), mime=True) in config["ALLOWED_MIMETYPES"]
 
 @app.route('/', methods=['GET', 'POST'])
@@ -180,7 +177,7 @@ def nginx_error(error):
 
 if config["DELETE_FILES"]:
   cleaner_thread()
-  
+
 if __name__ == '__main__':
   app.run(
     port=config["PORT"],
