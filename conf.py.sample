@@ -10,7 +10,7 @@ config = dict()
 config["HOST"] = "127.0.0.1"
 
 # This string will be used in file URLs that are returned, you will need to include http:// or https://
-config["DOMAIN"] = "http://example.com"
+config["DOMAIN"] = "http://example.com/"
 config["PORT"] = 8282
 
 # Disable this for production use

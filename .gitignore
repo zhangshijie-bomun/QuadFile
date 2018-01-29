@@ -1,5 +1,8 @@
 # JetBrains files
 .idea/*
+
+# VSCode files
+.vscode/*
 # Configuration
 conf.py
 # Data
