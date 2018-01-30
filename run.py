@@ -123,12 +123,9 @@ def upload_file():
 @app.route('/about')
 def about():
   return render_template('about.html', page=config["SITE_DATA"])
-@app.route('/terms')
-def terms():
-  return render_template('terms.html', page=config["SITE_DATA"])
-@app.route('/privacy')
-def privacy():
-  return render_template('privacy.html', page=config["SITE_DATA"])
+@app.route('/services')
+def services():
+  return render_template('services.html', page=config["SITE_DATA"])
 @app.route('/faq')
 def faq():
   return render_template('faq.html', page=config["SITE_DATA"])
