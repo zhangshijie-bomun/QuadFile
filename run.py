@@ -91,8 +91,7 @@ def upload_file():
     if file and allowed_file(file):
       filename = secure_filename(file.filename)
       if filename.find(".")!=-1: #check if filename has a .(to check if it should split ext)
-        ext = filename.rsplit('.', 1)[1]
-        filename = os.urandom(5).hex() + '.' +  ext
+        filename = os.urandom(5).hex() + '.' + filename.rsplit('.',1)[1]
       else:
         filename = os.urandom(5).hex()
 
@@ -133,6 +132,10 @@ def faq():
 def dmca():
   video = random.choice(os.listdir("static/dmca/"))
   return render_template('dmca.html', page=config["SITE_DATA"], video=video)
+@app.route('/welcome')
+def welcome():
+  video = random.choice(os.listdir("static/welcome/"))
+  return render_template('welcome.html', page=config["SITE_DATA"], video=video)
 
 # Static resources that browsers spam for
 @app.route('/favicon.ico')
