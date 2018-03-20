@@ -24,12 +24,21 @@ app = Flask(__name__)
 print_log('Main', 'Running in "' + os.getcwd() + '"')
 print_log('Main', 'Checking for data folder')
 if not os.path.exists(config['UPLOAD_FOLDER']):
-  print_log('Main', 'Data folder not found, creating')
+  print_log('Warning', 'Data folder not found, creating')
   os.makedirs(config['UPLOAD_FOLDER'])
+if not os.path.exists('files.db'):
+  print_log('Warning', 'Database not found, attempting to create')
+  os.system('sqlite3 files.db < schema.sql')
+  if not os.path.exists('files.db'):
+    print_log('Warning', 'Could not create database. Is sqlite3 available?')
+    quit()
+  else:
+    print_log('Notice', 'Database created')
 if config["EXTENDED_DEBUG"] == False:
   log = logging.getLogger('werkzeug')
   log.setLevel(logging.ERROR)
 
+print_debug = config["DEBUG"]
 
 def cleaner_thread():
   # Call itself again after the interval
@@ -42,11 +51,11 @@ def cleaner_thread():
 
 
 def delete_old():
-  print_log('Notice', 'Cleaner running')
+  print_log('Thread', 'Cleaner running', print_debug)
   targetTime = time.time() - config["TIME"]
   old = db.get_old_files(targetTime)
   for file in old:
-    print_log('Notice', 'Removing old file "' + file["file"] + '"')
+    print_log('Thread', 'Removing old file "' + file["file"] + '"')
     try:
       os.remove(os.path.join(config["UPLOAD_FOLDER"], file["file"]))
     except Exception:
@@ -63,7 +72,7 @@ def allowed_file(filename):
     return True
   else:
     if config["BLACKLIST"]:
-      return '.' in filename and filename.rsplit('.', 1)[1] not in config["BANNED_EXTENSIONS"]      
+      return '.' in filename and filename.rsplit('.', 1)[1] not in config["BANNED_EXTENSIONS"]
     else:
       return '.' in filename and filename.rsplit('.', 1)[1] in config["ALLOWED_EXTENSIONS"]
 
@@ -71,7 +80,7 @@ def allowed_file(filename):
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
   if request.method == 'POST':
-    print_log('Web', 'New file received')
+    print_log('Main', 'New file received', print_debug)
     if not application.basicauth(request.headers.get('X-Hyozan-Auth'), config["KEY"]):
       abort(403)
     data = dict()
@@ -85,7 +94,7 @@ def upload_file():
 
       thread1 = Thread(target = db.add_file, args = (filename,))
       thread1.start()
-      print_log('Thread', 'Adding to DB')
+      print_log('Thread', 'Adding file to DB', print_debug)
       file.save(os.path.join(config['UPLOAD_FOLDER'], filename))
       thread1.join()
 
@@ -104,6 +113,7 @@ def upload_file():
 
   # Return Web UI if we have a GET request
   elif request.method == 'GET':
+    print_log('Web', 'Hit upload page')
     return render_template('upload.html', page=config["SITE_DATA"])
 
 # Def all the static pages
@@ -149,7 +159,7 @@ def no_permission(e):
 
 @app.route('/<filename>', methods=['GET'])
 def get_file(filename):
-  print_log('Web', 'Hit "' + filename + '" - ' + time_to_string(time.time()))
+  print_log('Web', 'Hit "' + filename + '"')
   try:
     db.update_file(filename)
   except Exception:
@@ -170,7 +180,7 @@ def nginx_error(error):
 
 if config["DELETE_FILES"]:
   cleaner_thread()
-  
+
 if __name__ == '__main__':
   app.run(
     port=config["PORT"],
