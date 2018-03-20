@@ -10,7 +10,6 @@ def print_log(source, message, should_print=True):
     return
 
   message_meta = build_message_meta(source)
-
   if source == "Main":
     print('\033[92m', message_meta, '\033[0m', message)
   elif source == "Notice":
