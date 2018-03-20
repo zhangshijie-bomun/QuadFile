@@ -5,7 +5,7 @@ import time
 
 # Some messages pass a True or False as should_print depending on config variables
 # Default to true, but return doing nothing if they pass a False.
-def print_log(source="None", message, should_print=True):
+def print_log(source, message, should_print=True):
   if should_print == False:
     return
 

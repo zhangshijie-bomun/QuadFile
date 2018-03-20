@@ -106,7 +106,7 @@ def upload_file():
 
       try:
         if request.form["source"] == "web":
-          print_log('Web', 'Returned link page', print_debug)
+          print_log('Web', 'Returned link page for "' + file["file"] + '"', print_debug)
           return render_template('link.html', data=data, page=config["SITE_DATA"])
       except Exception:
         print_log('Web', 'No web reported in form, returned JSON', print_debug)
