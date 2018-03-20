@@ -9,16 +9,22 @@ def print_log(source, message, should_print=True):
   if should_print == False:
     return
 
+  message_meta = build_message_meta(source)
+
   if source == "Main":
-    print('\033[92m', current_time(), source.center(8, '-'), ': \033[0m', message)
+    print('\033[92m', message_meta, '\033[0m', message)
   elif source == "Notice":
-    print('\033[93m', current_time(), source.center(8, '-'), ': \033[0m', message)
+    print('\033[93m', message_meta, '\033[0m', message)
   elif source == "Warning":
-    print('\033[91m', current_time(), source.center(8, '-'), ': \033[0m', message)
+    print('\033[91m', message_meta, '\033[0m', message)
   elif source == "Web":
-    print('\033[95m', current_time(), source.center(8, '-'), ': \033[0m', message)
+    print('\033[95m', message_meta, '\033[0m', message)
   else:
-    print('\033[94m', current_time(), source.center(8, '-'), ': \033[0m', message)
+    print('\033[94m', message_meta, '\033[0m', message)
+
+# Builds the metadata part for the messages above
+def build_message_meta(source):
+  return current_time() + ' ' + source.center(8, '-') + ' :'
 
 def current_time():
   return time_to_string(time.time(), True)
