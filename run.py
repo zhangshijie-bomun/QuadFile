@@ -45,7 +45,7 @@ def cleaner_thread():
   cleaner = Timer(config["CLEAN_INTERVAL"], cleaner_thread)
   cleaner.daemon = True # Daemons will attempt to exit cleanly along with the main process, which we want
   cleaner.start()
-
+  print_log('Thread', 'Cleaner prepared', print_debug)
   # Actual function
   delete_old()
 
@@ -69,6 +69,7 @@ def error_page(error, code):
 
 def allowed_file(filename):
   if config["ALLOW_ALL_FILES"]:
+    print_log('Main', 'All files permitted, no check done', print_debug)
     return True
   else:
     if config["BLACKLIST"]:
@@ -90,6 +91,7 @@ def upload_file():
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
       while os.path.exists(os.path.join(config["UPLOAD_FOLDER"], filename)):
+        print_log('Main', 'File exists, generating new name', print_debug)
         filename = str(randint(1000,8999)) + '-' + secure_filename(filename)
 
       thread1 = Thread(target = db.add_file, args = (filename,))
@@ -104,8 +106,10 @@ def upload_file():
 
       try:
         if request.form["source"] == "web":
+          print_log('Web', 'Returned link page', print_debug)
           return render_template('link.html', data=data, page=config["SITE_DATA"])
       except Exception:
+        print_log('Web', 'No web reported in form, returned JSON', print_debug)
         return json.dumps(data)
     else:
       print_log('Notice', 'Forbidden file received')
@@ -181,6 +185,7 @@ def nginx_error(error):
 if config["DELETE_FILES"]:
   cleaner_thread()
 
+print_log('Main', 'Launching flask', print_debug)
 if __name__ == '__main__':
   app.run(
     port=config["PORT"],
