@@ -11,6 +11,7 @@ body {
   font-family: "Open Sans", "Lato", sans-serif;
   color: #ffffff;
   background-color: #1d1d1d;
+  background-image: url(/static/bg-dark.png);
 }
 
 @keyframes rise {
