@@ -1,14 +1,7 @@
 {
-<<<<<<< HEAD:static/sharex.sxcu
   "Name": "example.com file uploader",
   "DestinationType": "FileUploader",
   "RequestURL": "https://example.com",
-=======
-  "Name": "thecum.zone",
-  "DestinationType": "ImageUploader, FileUploader",
-  "RequestType": "POST",
-  "RequestURL": "https://thecum.zone",
->>>>>>> 5c5348a090b3d07d0c95e2b20706a265e2763d9d:static/cumzone.sxcu
   "FileFormName": "file",
   "ResponseType": "Text",
   "URL": "$json:url$"
