@@ -7,10 +7,7 @@ import os
 import random
 import json
 import time
-<<<<<<< HEAD
 import magic
-=======
->>>>>>> quad/master
 from random import randint
 
 # Import our configuration
