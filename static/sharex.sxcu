@@ -1,7 +1,7 @@
 {
-  "Name": "The Cum Zone",
+  "Name": "example.com file uploader",
   "DestinationType": "FileUploader",
-  "RequestURL": "https://thecum.zone",
+  "RequestURL": "https://example.com",
   "FileFormName": "file",
   "URL": "$json:url$"
 }

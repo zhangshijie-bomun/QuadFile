@@ -52,3 +52,4 @@ Recommended:
 * Configure nginx and proxy_pass it to gunicorn
 * ???
 * PROFIT (Hopefully)
+* Edit the pages in templates/*.html to personalize

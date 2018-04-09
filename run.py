@@ -122,9 +122,6 @@ def upload_file():
 @app.route('/about')
 def about():
   return render_template('about.html', page=config["SITE_DATA"])
-@app.route('/services')
-def services():
-  return render_template('services.html', page=config["SITE_DATA"])
 @app.route('/faq')
 def faq():
   return render_template('faq.html', page=config["SITE_DATA"])
@@ -132,10 +129,6 @@ def faq():
 def dmca():
   video = random.choice(os.listdir("static/dmca/"))
   return render_template('dmca.html', page=config["SITE_DATA"], video=video)
-@app.route('/welcome')
-def welcome():
-  video = random.choice(os.listdir("static/welcome/"))
-  return render_template('welcome.html', page=config["SITE_DATA"], video=video)
 
 # Static resources that browsers spam for
 @app.route('/favicon.ico')
