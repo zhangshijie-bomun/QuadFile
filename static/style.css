@@ -11,7 +11,6 @@ body {
   font-family: "Open Sans", "Lato", sans-serif;
   color: #ffffff;
   background-color: #1d1d1d;
-  background-image: url(/static/bg-dark.png);
 }
 
 @keyframes rise {
@@ -44,14 +43,14 @@ body {
 .title {
   font-size: 34pt;
   font-weight: 300;
-  margin-bottom: 30px;
+  margin-bottom: 5px;
   text-align: center;
   animation: appear 0.75s ease-out;
 }
 
 .links {
   font-size: 0;
-  margin-top: 40px;
+  margin-top: 5px;
   text-align: center;
   list-style: none;
 }
