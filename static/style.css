@@ -2,18 +2,20 @@
 
 /* Being lazy 101 */
 * {
-  margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  background-color: #1d1d1d;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
 }
 
 body {
   font-family: "Open Sans", "Lato", sans-serif;
   color: #ffffff;
-  background-color: #1d1d1d;
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center;
   display:block;
 }
 .btn{
@@ -122,7 +124,6 @@ body {
   background-color: #229922;
   border-radius: 10px;
   transition: background 0.1s ease-out;
-  overflow: hidden;
 }
 
 .uploadButton:hover {

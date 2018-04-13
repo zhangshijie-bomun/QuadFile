@@ -1,12 +1,12 @@
 function bgraven (){
-    var body = document.getElementsByTagName('body')[0];
-    body.style.backgroundImage = 'url("/static/bg/raven.png")';
+    var html = document.getElementsByTagName('html')[0];
+    html.style.backgroundImage = 'url("/static/bg/raven.png")';
 }
 function bgjinx (){
-    var body = document.getElementsByTagName('body')[0];
-    body.style.backgroundImage = 'url("/static/bg/jinx.png")';
+    var html = document.getElementsByTagName('html')[0];
+    html.style.backgroundImage = 'url("/static/bg/jinx.png")';
 }
 function bgblank (){
-    var body = document.getElementsByTagName('body')[0];
-    body.style.backgroundImage = 'url("")';
+    var html = document.getElementsByTagName('html')[0];
+    html.style.backgroundImage = 'url("")';
 }
