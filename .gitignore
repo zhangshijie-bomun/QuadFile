@@ -1,6 +1,9 @@
 # JetBrains files
 .idea/*
 
+# python project stuff
+myprojectenv/*
+
 # VSCode files
 .vscode/*
 # Configuration
