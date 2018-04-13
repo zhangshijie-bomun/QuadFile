@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" charset="utf-8" src="/static/bg.js"></script>
 
     <!-- Meta tags for web app usage -->
     <meta content="#1D1D1D" name="theme-color">
@@ -24,5 +25,23 @@
     <div class="page">
       {% block body %}{% endblock %}
     </div>
+
+    <ul class="btn">
+      <li>
+        <button onclick="bgblank()">Blank</button>
+      </li>
+      <li>
+        <button onclick="bgraven()">Raven</button>
+      </li>
+      <!-- 
+      <li>
+        <button onclick="bgstarfire()">Starfire</button>
+      </li>
+      -->
+      <li>
+        <button onclick="bgjinx()"> Jinx</button>
+      </li>
+    </ul>
   </body>
+
 </html>

@@ -11,7 +11,24 @@ body {
   font-family: "Open Sans", "Lato", sans-serif;
   color: #ffffff;
   background-color: #1d1d1d;
-  background-image: url(/static/bg-dark.png);
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  display:block;
+}
+.btn{
+  font-size: 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  float: right;
+  color: #ffffff;
+  cursor: pointer;
+  }
+
+.btn li {
+  font-size: 12pt;
+  display: inline-block;
 }
 
 @keyframes rise {
