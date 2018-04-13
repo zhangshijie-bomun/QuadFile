@@ -1,5 +1,6 @@
 {%  extends "regular.html" %}
 {% block body %}
+<title>DMCA - {{ page.title }}</title>
   <video class="dmca" autoplay loop>
     <source src="{{ url_for('static', filename='dmca/' + video) }}">
   </video>
