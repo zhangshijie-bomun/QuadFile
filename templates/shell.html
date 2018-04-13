@@ -5,7 +5,6 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" charset="utf-8" src="/static/bg.js"></script>
 
     <!-- Meta tags for web app usage -->
     <meta content="#1D1D1D" name="theme-color">
@@ -19,6 +18,21 @@
     <link href="{{ url_for('static', filename='logo/32px.png') }}" rel="icon" sizes="32x32">
     <link href="{{ url_for('static', filename='logo/64px.png') }}" rel="icon" sizes="64x64">
     <link href="{{ url_for('static', filename='logo/152px.png') }}" rel="icon" sizes="152x152">
+
+    <script type="text/javascript">
+    function bgraven (){
+    var html = document.getElementsByTagName('html')[0];
+    html.style.backgroundImage = 'url("/static/bg/raven.png")';
+}
+function bgjinx (){
+    var html = document.getElementsByTagName('html')[0];
+    html.style.backgroundImage = 'url("/static/bg/jinx.png")';
+}
+function bgblank (){
+    var html = document.getElementsByTagName('html')[0];
+    html.style.backgroundImage = 'url("")';
+}
+    </script>
 
   </head>
   <body>
