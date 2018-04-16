@@ -20,29 +20,8 @@
     <link href="{{ url_for('static', filename='logo/152px.png') }}" rel="icon" sizes="152x152">
 
     <script type="text/javascript">
-    function bgraven (){
-    var html = document.getElementsByTagName('html')[0];
-    html.style.backgroundImage = 'url("/static/bg/raven.png")';
-}
-function bgjinx (){
-    var html = document.getElementsByTagName('html')[0];
-    html.style.backgroundImage = 'url("/static/bg/jinx.png")';
-}
-function bgblank (){
-    var html = document.getElementsByTagName('html')[0];
-    html.style.backgroundImage = 'url("")';
-}
-function bgnatalia (){
-    var html = document.getElementsByTagName('html')[0];
-    html.style.backgroundImage = 'url("/static/bg/natalia.jpg")';
-}
-function bgtitansbeach (){
-    var html = document.getElementsByTagName('html')[0];
-    html.style.backgroundImage = 'url("/static/bg/titansbeach.jpg")';
-}
-function bgstarfire (){
-    var html = document.getElementsByTagName('html')[0];
-    html.style.backgroundImage = 'url("/static/bg/starfire.png")';
+    function background(image){
+    document.documentElement.style.backgroundImage = 'url("/static/bg/' + image + '")';
 }
     </script>
 
@@ -54,22 +33,22 @@ function bgstarfire (){
 
     <ul class="btn">
       <li>
-        <button onclick="bgblank()">Blank</button>
+        <button onclick="background('')">Blank</button>
       </li>
       <li>
-        <button onclick="bgraven()">Raven</button>
+        <button onclick="background('raven.png')">Raven</button>
       </li>
       <li>
-        <button onclick="bgstarfire()">Starfire</button>
+        <button onclick="background('starfire.png')">Starfire</button>
       </li>
       <li>
-        <button onclick="bgjinx()">Jinx</button>
+        <button onclick="background('jinx.png')">Jinx</button>
       </li>
       <li>
-        <button onclick="bgnatalia()">Natalia</button>
+        <button onclick="background('natalia.jpg')">Natalia</button>
       </li>
       <li>
-        <button onclick="bgtitansbeach()">Titans beach</button>
+        <button onclick="background('titans.jpg')">Titans</button>
       </li>
     </ul>
   </body>
