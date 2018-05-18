@@ -20,9 +20,11 @@
     <link href="{{ url_for('static', filename='logo/152px.png') }}" rel="icon" sizes="152x152">
 
     <script type="text/javascript">
-    function background(image){
-    document.documentElement.style.backgroundImage = 'url("/static/bg/' + image + '")';
-}
+    function background(){
+      var backgrounds = 11;
+      var num = Math.ceil( Math.random() * backgrounds );
+      document.documentElement.style.backgroundImage = 'url("/static/bg/'+num+'.png")';
+    }
     </script>
   </head>
   <body>
@@ -32,28 +34,7 @@
 
     <ul class="btn">
       <li>
-        <button onclick="background('')">Blank</button>
-      </li>
-      <li>
-        <button onclick="background('raven.png')">Raven</button>
-      </li>
-      <li>
-        <button onclick="background('starfire.png')">Starfire</button>
-      </li>
-      <li>
-        <button onclick="background('jinx.png')">Jinx</button>
-      </li>
-      <li>
-        <button onclick="background('natalia.jpg')">Natalia</button>
-      </li>
-      <li>
-        <button onclick="background('titans.jpg')">Titans</button>
-      </li>
-      <li>
-        <button onclick="background('geralt.jpg')">Geralt</button>
-      </li>
-      <li>
-        <button onclick="background('gardevoir.jpg')">Gardevoir</button>
+        <button onclick="background()">Enable Backgounds</button>
       </li>
     </ul>
   </body>
