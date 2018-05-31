@@ -9,7 +9,8 @@ to{margin-top:0;opacity:1;}
 @keyframes appear{from{opacity:0;}
 to{opacity:1;}
 }
-.page{width:100%;max-width:720px;padding:10px;margin-left:auto;margin-right:auto;margin-top:50vh;transform:translateY(-50%)}
+.img{width: -moz-available;width: -webkit-fill-available;}
+.page{max-width: 720px;padding: 10px;margin-left: auto;margin-right: auto;display: flex;flex-direction: column;justify-content: center;min-height: 97vh;}
 .note{text-align:center;font-size:8pt;color:#AAAAAA;animation:appear 0.75s ease-out;}
 .title{font-size:34pt;font-weight:300;margin-bottom:30px;text-align:center;animation:appear 0.75s ease-out;}
 .links{font-size:0;margin-top:40px;text-align:center;list-style:none;}
